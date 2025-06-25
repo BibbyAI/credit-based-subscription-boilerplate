@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { logout } from "./actions"
 import { TestApiButtons } from "./test-api-buttons"
+import Link from "next/link"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -26,6 +27,9 @@ export default async function DashboardPage() {
               <h1 className="text-xl font-bold text-foreground">Dashboard</h1>
             </div>
             <div className="flex items-center space-x-4">
+              <Link href="/pricing">
+                <Button variant="ghost" size="sm">Pricing</Button>
+              </Link>
               <span className="text-sm text-muted-foreground">Welcome back!</span>
               <form>
                 <Button formAction={logout} variant="outline" size="sm">
