@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { logout } from "./actions"
+import { TestApiButtons } from "./test-api-buttons"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -83,6 +84,11 @@ export default async function DashboardPage() {
                 <span className="text-sm text-muted-foreground">Account Created</span>
                 <span className="text-sm text-foreground">{new Date(user.created_at).toLocaleDateString()}</span>
               </div>
+            </div>
+
+            <div className="pt-4 border-t border-border">
+              <h3 className="text-sm font-medium text-foreground mb-3">Actions</h3>
+              <TestApiButtons />
             </div>
           </CardContent>
         </Card>
