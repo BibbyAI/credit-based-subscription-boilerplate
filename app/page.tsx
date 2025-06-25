@@ -11,6 +11,9 @@ export default function HomePage() {
               <h1 className="text-xl font-bold text-foreground">MyApp</h1>
             </div>
             <div className="flex items-center space-x-4">
+              <Link href="/pricing">
+                <Button variant="ghost">Pricing</Button>
+              </Link>
               <Link href="/login">
                 <Button variant="ghost">Login</Button>
               </Link>
