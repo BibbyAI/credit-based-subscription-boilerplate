@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import { logout } from "./actions"
 import { TestApiButtons } from "./test-api-buttons"
 import Link from "next/link"
+import { Navbar } from "@/components/navbar"
 
 export default async function DashboardPage() {
   const supabase = await createClient()
@@ -20,26 +21,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="bg-card border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <h1 className="text-xl font-bold text-foreground">Dashboard</h1>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Link href="/pricing">
-                <Button variant="ghost" size="sm">Pricing</Button>
-              </Link>
-              <span className="text-sm text-muted-foreground">Welcome back!</span>
-              <form>
-                <Button formAction={logout} variant="outline" size="sm">
-                  Sign Out
-                </Button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar title="Dashboard" />
 
       <main className="max-w-4xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
