@@ -17,6 +17,7 @@ import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { ManageSubscriptionButton } from "@/components/manage-subscription-button";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { CreditDashboard } from "@/components/credit-dashboard";
 
 interface DashboardPageProps {
   searchParams: Promise<{ message?: string }>;
@@ -42,21 +43,12 @@ export default async function DashboardPage({
     .eq("user_id", user.id)
     .single();
 
-  const { data: credits, error: creditsError } = await supabase
-    .from("user_credits")
-    .select("credits")
-    .eq("user_id", user.id)
-    .single();
-
   // Handle database table not existing or RLS issues
-  const safeCredits = creditsError ? null : credits;
   const safeSubscription = subError ? null : subscription;
 
   console.log("Dashboard data:", {
     user: user.email,
-    credits: safeCredits?.credits,
     subscription: safeSubscription?.plan_type,
-    creditsError: creditsError?.message,
     subError: subError?.message,
   });
 
@@ -85,9 +77,12 @@ export default async function DashboardPage({
         )}
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground">
-            Account Information
-          </h1>
+          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+        </div>
+
+        {/* Credit Dashboard */}
+        <div className="mb-8">
+          <CreditDashboard />
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -160,27 +155,13 @@ export default async function DashboardPage({
 
           <Card>
             <CardHeader>
-              <CardTitle>Subscription & Credits</CardTitle>
+              <CardTitle>Subscription Management</CardTitle>
               <CardDescription>
-                Your current plan and available credits
+                Your current plan and subscription details
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="text-center py-6 bg-primary/10 rounded-lg">
-                <div className="text-3xl font-bold text-foreground">
-                  {safeCredits?.credits?.toLocaleString() || "N/A"}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  available credits
-                </div>
-                {creditsError && (
-                  <div className="text-xs text-orange-600 mt-1">
-                    Database not set up yet
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-4 pt-4 border-t border-border">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground">
                     Current Plan
