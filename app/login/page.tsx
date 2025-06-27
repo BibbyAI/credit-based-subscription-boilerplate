@@ -1,31 +1,63 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { login } from "./actions"
+"use client";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { login } from "./actions";
 
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Sign In</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">
+            Sign In
+          </CardTitle>
           <CardDescription className="text-center">
             Enter your email and password to access your account
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form className="space-y-4">
+          <form className="space-y-4" suppressHydrationWarning>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" placeholder="Enter your email" required />
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                required
+                autoComplete="email"
+                suppressHydrationWarning
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" name="password" type="password" placeholder="Enter your password" required />
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+                autoComplete="current-password"
+                minLength={6}
+                suppressHydrationWarning
+              />
             </div>
-            <Button formAction={login} className="w-full">
+            <Button
+              formAction={login}
+              className="w-full"
+              type="submit"
+              suppressHydrationWarning
+            >
               Sign In
             </Button>
           </form>
@@ -36,12 +68,15 @@ export default function LoginPage() {
             </Link>
           </div>
           <div className="mt-2 text-center">
-            <Link href="/" className="text-sm text-muted-foreground hover:underline">
+            <Link
+              href="/"
+              className="text-sm text-muted-foreground hover:underline"
+            >
               Back to Home
             </Link>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
